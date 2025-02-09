@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -16,11 +17,11 @@
     <nav class="sidebar">
       <div class="head">
         <h1>DASHBOARD</h1>
-        <img src="./img/dashboard.png" />
+        <img src="../img/dashboard.png" />
       </div>
       <ul>
-        <li class="active">
-          <a href="index.html"
+        <li>
+          <a href="dashboard.html"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
@@ -47,7 +48,7 @@
             ><span>Products</span></a
           >
         </li>
-        <li>
+        <li class="active">
           <a href="reports.html"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
@@ -112,66 +113,97 @@
         </div>
         <div class="user-profile">
           <p>Howell Griff M. Pimentel</p>
-          <img src="img/gojo.jpg" />
+          <img src="../img/gojo.jpg" />
         </div>
       </div>
-      <div class="content" style="padding: 0 !important; margin: 0">
-        <h1 style="padding: 12px !important">
-          Designed for Creators, Built for Speed - Get Yours!
-        </h1>
-        <!--  -->
-        <div
-          id="carouselExampleAutoplaying"
-          class="carousel slide carousel-fade"
-          data-bs-ride="carousel"
-          data-bs-interval="5000"
-          style="width: fit-content"
-        >
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img
-                src="img/carousel1.png"
-                class="d-block w-100"
-                alt="Slide 1"
-              />
+      <div class="content">
+        <h1>Reports</h1>
+        <div style="margin-top: 50px !important">
+          <div class="card flex-fill w-100 draggable">
+            <div class="card-header">
+              <h5 class="card-title mb-0">Sales</h5>
             </div>
-            <div class="carousel-item">
-              <img
-                src="img/carousel2.png"
-                class="d-block w-100"
-                alt="Slide 2"
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="img/carousel3.png"
-                class="d-block w-100"
-                alt="Slide 3"
-              />
+            <div class="card-body d-flex">
+              <div class="align-self-center w-100">
+                <div class="py-3">
+                  <div class="chart chart-xs">
+                    <div class="chartjs-size-monitor">
+                      <div class="chartjs-size-monitor-expand">
+                        <div class=""></div>
+                      </div>
+                      <div class="chartjs-size-monitor-shrink">
+                        <div class=""></div>
+                      </div>
+                    </div>
+                    <canvas
+                      id="chartjs-dashboard-pie"
+                      width="856"
+                      height="400"
+                      style="display: block; height: 200px; width: 428px"
+                      class="chart-pie chartjs-render-monitor"
+                    ></canvas>
+                  </div>
+                </div>
+
+                <table class="table mb-0">
+                  <tbody>
+                    <tr>
+                      <td>Nitro V ANV16-41-R3RP OPI Obsidian Black</td>
+                      <td class="text-end">876,534</td>
+                    </tr>
+                    <tr>
+                      <td>Acer Predator Helios Neo 14 PHN14-51-74P3</td>
+                      <td class="text-end">973,740</td>
+                    </tr>
+                    <tr>
+                      <td>Asus Tuf Gaming F15</td>
+                      <td class="text-end">687,753</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleAutoplaying"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
         </div>
-        <!--  -->
       </div>
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var chartsPie = document.querySelectorAll(".chart-pie");
+
+        chartsPie.forEach(function (chart) {
+          if (!chart.getAttribute("data-chart-initialized")) {
+            new Chart(chart, {
+              type: "pie",
+              data: {
+                labels: [
+                  "Nitro V ANV16-41-R3RP OPI Obsidian Black",
+                  "Acer Predator Helios Neo 14 PHN14-51-74P3",
+                  "Asus Tuf Gaming F15",
+                ],
+                datasets: [
+                  {
+                    data: [876534, 973740, 687753],
+                    backgroundColor: ["#007bff", "#ffc107", "#dc3545"],
+                    borderWidth: 5,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    display: true,
+                  },
+                },
+              },
+            });
+            chart.setAttribute("data-chart-initialized", "true");
+          }
+        });
+      });
+    </script>
     <!-- Icon -->
     <script src="https://kit.fontawesome.com/e2b033f311.js"></script>
     <!-- Bootstrap JS -->
